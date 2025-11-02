@@ -84,7 +84,7 @@ function updateAllHeatmaps(team, gameweek = 1) {
         .style('opacity', 0);
 
       // Set crossfade duration
-      const duration = 1000;
+      const duration = 600;
 
       overlay.transition()
         .duration(duration)
@@ -135,7 +135,7 @@ let sliderInitialized = false;
 
   // Slider change handler (only attach once)
   if (!sliderInitialized) {
-    document.getElementById("gameweek-slider").addEventListener("change", e => {
+    document.getElementById("gameweek-slider").addEventListener("input", e => {
       const gameweek = parseInt(e.target.value);
       updateAllHeatmaps(currentTeam, gameweek);
     });
