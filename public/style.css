@@ -5,76 +5,166 @@
 }
 
 body {
-  padding: 64px 32px;
-  font: 18px/1.5 "Avenir", "Avenir Next", "Helvetica Neue", Arial, sans-serif;
-  background-color: #22312b;
-  color: white
+  padding: 16px 20px;
+  --bg: #22312b; /* keep original background color */
+  --fg: #ffffff;
+  --muted: rgba(255,255,255,0.75);
+  --accent: rgba(255,255,255,0.06);
+  font-family: "Avenir", "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  background-color: var(--bg);
+  color: var(--fg);
+  min-height: 100vh;
+  box-sizing: border-box;
 }
 
 header,
 footer {
-  max-width: 90ex;
+  max-width: 100%;
   margin: 0 auto;
 }
 
 header {
-  padding-bottom: 32px;
-  border-bottom: 2px solid #ccc;
+  padding: 12px 0 16px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+header h1 {
+  font-size: 1.4rem;
+  margin-bottom: 6px;
+}
+
+header p {
+  font-size: 0.9rem;
+  margin: 0;
 }
 
 footer {
-  padding-top: 16px;
-  text-align: right;
+  padding-top: 12px;
+  text-align: center;
+  opacity: 0.8;
+  font-size: 0.85rem;
 }
 
 h1 {
-  margin-bottom: 32px;
-  color: white;
+  margin-bottom: 8px;
+  color: var(--fg);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  font-size: 1.2rem;
 }
 
 a {
   text-decoration: none;
-  color: white;
+  color: var(--fg);
 }
 
-#pressure-container {
-  width: 600px;
-  height: 400px;
-  background-position: center;
-  background-repeat: no-repeat;
-  margin: 20px auto;
-  position: relative
-}
-
-#pressure {
-  width: 600px;
-  height: 400px;
-  background-position: center;
-  background-repeat: no-repeat;
-  margin: 20px auto;
-  position: relative;
-  inset: 0;
-}
-
-.layer {
-  width: 600px;
-  height: 400px;
-  position: absolute;
-  inset: 0;
-  background-size: cover;
-  background-position: center;
-  margin: 20px auto;
-}
-
-#gameweek-slider {
-  width: 600px;
-  margin: 20px auto;
-  display: block;
-}
-
+/* Visualization area - maintain sizes but present more cleanly */
 #visualization-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 20px 0;
+  margin: 8px 0 12px;
+}
+
+/* 2x2 Grid for heatmaps */
+#heatmaps-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  max-width: 100%;
+  margin: 12px auto;
+  width: 100%;
+}
+
+.heatmap-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.heatmap-item h3 {
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 6px;
+}
+
+.heatmap-container,
+.heatmap,
+.layer {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  background-size: cover;
+}
+
+.heatmap-container {
+  border-radius: 6px;
+  overflow: hidden;
+  background-color: rgba(0,0,0,0.15);
+  max-width: 480px;
+}
+
+.heatmap {
+  margin: 0;
+  inset: 0;
+}
+
+.layer {
+  position: absolute;
+  inset: 0;
+}
+
+/* Slider and controls styling */
+#gameweek-slider {
+  width: 100%;
+  max-width: 500px;
+  margin: 10px auto;
+  display: block;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.12), rgba(255,255,255,0.06));
+  outline: none;
+}
+
+#gameweek-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--fg);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+  border: 2px solid rgba(0,0,0,0.2);
+}
+
+/* Controls: selector and match-details */
+#team-selector {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--fg);
+  border: 1px solid rgba(255,255,255,0.12);
+  margin: 6px 0 8px;
+  font-size: 0.9rem;
+}
+
+#match-details {
+  color: var(--muted);
+  margin-bottom: 6px;
+  font-size: 0.85rem;
+}
+
+/* Small responsive tweaks */
+@media (max-width: 700px) {
+  #heatmaps-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
 }

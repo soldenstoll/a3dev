@@ -35,12 +35,35 @@
     <div id="visualization-container">
       <h1>Match Details</h1>
       <p id="match-details"></p>
-      <h1>Location of Pressure Applied Heatmap</h1>
+      <h1>Team Heatmaps</h1>
       <select id="team-selector">
-        <option value="">Chelsea</option>
+        <option value="Chelsea">Chelsea</option>
       </select>
-      <div id="pressure-container">
-        <div id="pressure"></div>
+      <div id="heatmaps-grid">
+        <div class="heatmap-item">
+          <h3>Dribble</h3>
+          <div class="heatmap-container" id="dribble-container">
+            <div class="heatmap" id="dribble"></div>
+          </div>
+        </div>
+        <div class="heatmap-item">
+          <h3>Pass</h3>
+          <div class="heatmap-container" id="pass-container">
+            <div class="heatmap" id="pass"></div>
+          </div>
+        </div>
+        <div class="heatmap-item">
+          <h3>Pressure</h3>
+          <div class="heatmap-container" id="pressure-container">
+            <div class="heatmap" id="pressure"></div>
+          </div>
+        </div>
+        <div class="heatmap-item">
+          <h3>Shot</h3>
+          <div class="heatmap-container" id="shot-container">
+            <div class="heatmap" id="shot"></div>
+          </div>
+        </div>
       </div>
     </div>
     <input id="gameweek-slider" type="range" min="1" max="38" value="1" step="1"/>
