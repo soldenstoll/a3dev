@@ -17,7 +17,6 @@ const teams = [
   "Arsenal",
   "Aston Villa",
   "Bournemouth",
-  "Chelsea",
   "Crystal Palace",
   "Everton",
   "Leicester City",
@@ -46,73 +45,65 @@ teams.forEach(team => {
   selector.appendChild(option);
 });
 
-function getTeam() {
-  const selector = document.getElementById("team-selector");
-  selector.addEventListener("change", e => {
-    const team = e.target.value;
-    console.log("Selected team:", team);
-  });
-}
-
 
 // Creates a visualization 
 function heatmap(team) {
-    const pressure_container = document.getElementById("pressure-container")
-    const pressure = document.getElementById("pressure")
-    const match_details = document.getElementById("match-details")
-    const team_name = team.replaceAll(" ", "_")
+  const pressure_container = document.getElementById("pressure-container")
+  const pressure = document.getElementById("pressure")
+  const match_details = document.getElementById("match-details")
+  const team_name = team.replaceAll(" ", "_")
 
-    // Set gameweek 1 data for match_details
-    match = matches[team_name][1]
-    match_details.textContent = 
-        match["home_team"] + " " + match["score"] + " - " + match["opponent_score"] + " " + match["away_team"]
-        + ", " + "Gameweek 1" + ", " + match["match_date"].split(" ")[0]
+  // Set gameweek 1 data for match_details
+  match = matches[team][1]
+  match_details.textContent =
+    match["home_team"] + " " + match["score"] + " - " + match["opponent_score"] + " " + match["away_team"]
+    + ", " + "Gameweek 1" + ", " + match["match_date"].split(" ")[0]
 
-    // Set initial size for the div
-    pressure.style.width = "600px"
-    pressure.style.height = "400px"
-    
-    // Set to gameweek 1 heatmap first
-    pressure.style.backgroundImage = `url(data/${team_name}/pressure/1.png)`
-    pressure.style.backgroundSize = "cover"
+  // Set initial size for the div
+  pressure.style.width = "600px"
+  pressure.style.height = "400px"
 
-    // Listen for slider changes
-    document.getElementById("gameweek-slider").addEventListener("change", e => {
-        let gameweek = e.target.value;
-        console.log(e.target.value)
+  // Set to gameweek 1 heatmap first
+  pressure.style.backgroundImage = `url(data/${team_name}/pressure/1.png)`
+  pressure.style.backgroundSize = "cover"
 
-        // Create overlay layer for next image
-        const overlay = d3.select(pressure_container).append('div')
-          .attr('class', 'layer')
-          .style('background-image', `url(data/${team_name}/pressure/${gameweek}.png)`)
-          .style('opacity', 0);
-          
-        // Upate match details
-        match = matches[team_name][gameweek]
-        match_details.textContent = 
-            match["home_team"] + " " + match["score"] + " - " + match["opponent_score"] + " " + match["away_team"]
-            + ", " + "Gameweek " + gameweek + ", " + match["match_date"].split(" ")[0]
+  // Listen for slider changes
+  document.getElementById("gameweek-slider").addEventListener("change", e => {
+    let gameweek = e.target.value;
+    console.log(e.target.value)
 
-        // Set crossfade duration
-        const duration = 1000;
+    // Create overlay layer for next image
+    const overlay = d3.select(pressure_container).append('div')
+      .attr('class', 'layer')
+      .style('background-image', `url(data/${team_name}/pressure/${gameweek}.png)`)
+      .style('opacity', 0);
 
-        overlay.transition()
-          .duration(duration)
-          .style('opacity', 1);
-          
-        // Add fading transition
-        d3.select(pressure)
-            .transition().duration(duration)
-            .style("opacity", 0)
-            .on("end", () => {
-                pressure.style.backgroundImage = `url(data/${team_name}/pressure/${gameweek}.png)`
-                pressure.style.opacity = 1
+    // Upate match details
+    match = matches[team][gameweek]
+    match_details.textContent =
+      match["home_team"] + " " + match["score"] + " - " + match["opponent_score"] + " " + match["away_team"]
+      + ", " + "Gameweek " + gameweek + ", " + match["match_date"].split(" ")[0]
 
-                // Remove overlay
-                overlay.remove()
-            })
-    })
-    return pressure
+    // Set crossfade duration
+    const duration = 1000;
+
+    overlay.transition()
+      .duration(duration)
+      .style('opacity', 1);
+
+    // Add fading transition
+    d3.select(pressure)
+      .transition().duration(duration)
+      .style("opacity", 0)
+      .on("end", () => {
+        pressure.style.backgroundImage = `url(data/${team_name}/pressure/${gameweek}.png)`
+        pressure.style.opacity = 1
+
+        // Remove overlay
+        overlay.remove()
+      })
+  })
+  return pressure
 }
 
 // Load matches then initialize the visualization. We must wait for the async
@@ -126,6 +117,16 @@ let matches = null;
   }
 
   // Now that matches is loaded, create the heatmap and append its element.
-  const maps = heatmap("Chelsea");
-  document.getElementById("pressure-container").appendChild(maps);
+  
+
+  selector.addEventListener('change', (e) => {
+    const team = e.target.value;
+    console.log(team);
+    if (!team) return;
+
+    // reset slider to gameweek 1 for the newly selected team
+    const slider = document.getElementById('gameweek-slider');
+    if (slider) slider.value = 1;
+    heatmap(team);
+  });
 })();
