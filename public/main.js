@@ -94,7 +94,7 @@ function heatmap(team) {
             + ", " + "Gameweek " + gameweek + ", " + match["match_date"].split(" ")[0]
 
         // Set crossfade duration
-        const duration = 2000;
+        const duration = 1000;
 
         overlay.transition()
           .duration(duration)
