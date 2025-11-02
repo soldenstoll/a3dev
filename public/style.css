@@ -37,20 +37,33 @@ a {
   color: white;
 }
 
+#pressure-container {
+  width: 600px;
+  height: 400px;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin: 20px auto;
+  position: relative
+}
+
 #pressure {
   width: 600px;
   height: 400px;
   background-position: center;
   background-repeat: no-repeat;
   margin: 20px auto;
+  position: relative;
+  inset: 0;
 }
 
-#pressure .layer {
+.layer {
+  width: 600px;
+  height: 400px;
   position: absolute;
   inset: 0;
   background-size: cover;
   background-position: center;
-  transition: none;
+  margin: 20px auto;
 }
 
 #gameweek-slider {

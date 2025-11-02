@@ -57,6 +57,7 @@ function getTeam() {
 
 // Creates a visualization 
 function heatmap(team) {
+    const pressure_container = document.getElementById("pressure-container")
     const pressure = document.getElementById("pressure")
     const match_details = document.getElementById("match-details")
     const team_name = team.replaceAll(" ", "_")
@@ -81,7 +82,7 @@ function heatmap(team) {
         console.log(e.target.value)
 
         // Create overlay layer for next image
-        const overlay = pressure.append('div')
+        const overlay = d3.select(pressure_container).append('div')
           .attr('class', 'layer')
           .style('background-image', `url(data/${team_name}/pressure/${gameweek}.png)`)
           .style('opacity', 0);
@@ -93,7 +94,7 @@ function heatmap(team) {
             + ", " + "Gameweek " + gameweek + ", " + match["match_date"].split(" ")[0]
 
         // Set crossfade duration
-        const duration = 300;
+        const duration = 2000;
 
         overlay.transition()
           .duration(duration)
@@ -126,5 +127,5 @@ let matches = null;
 
   // Now that matches is loaded, create the heatmap and append its element.
   const maps = heatmap("Chelsea");
-  document.getElementById("visualization-container").appendChild(maps);
+  document.getElementById("pressure-container").appendChild(maps);
 })();
