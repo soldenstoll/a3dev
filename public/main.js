@@ -78,9 +78,10 @@ function heatmap(team) {
     // Listen for slider changes
     document.getElementById("gameweek-slider").addEventListener("change", e => {
         let gameweek = e.target.value;
+        console.log(e.target.value)
 
         // Create overlay layer for next image
-        const overlay = container.append('div')
+        const overlay = pressure.append('div')
           .attr('class', 'layer')
           .style('background-image', `url(data/${team_name}/pressure/${gameweek}.png)`)
           .style('opacity', 0);
