@@ -25,9 +25,14 @@
 <body>
   <header>
     <h1><a href=".">How Consistent are Team Tactics Across the Premier League Season?</a></h1>
-
     <p>
-      <strong>Team Members</strong>: Liam Shalom, Solden Stoll
+      <strong>Team Members:</strong> Liam Shalom, Solden Stoll
+    </p>
+    <p class="project-description">
+      This interactive dashboard visualizes tactical patterns for Premier League teams across the 2015-16 season. 
+      Using Gaussian smoothing, we generated heatmaps showing where teams dribble, pass, apply pressure, and shoot. 
+      All data is standardized so the left side of each heatmap represents the selected team's defending half, 
+      allowing for consistent comparison across teams and match situations.
     </p>
   </header>
 
@@ -35,25 +40,25 @@
     <div id="visualization-container">
       <div id="heatmaps-grid">
         <div class="heatmap-item">
-          <h3>Dribble Location Heatmap</h3>
+          <h3>Dribble Location</h3>
           <div class="heatmap-container" id="dribble-container">
             <div class="heatmap" id="dribble"></div>
           </div>
         </div>
         <div class="heatmap-item">
-          <h3>Pass Location Heatmap</h3>
+          <h3>Pass Location</h3>
           <div class="heatmap-container" id="pass-container">
             <div class="heatmap" id="pass"></div>
           </div>
         </div>
         <div class="heatmap-item">
-          <h3>Location of Pressure Applied Heatmap</h3>
+          <h3>Location of Pressure Applied</h3>
           <div class="heatmap-container" id="pressure-container">
             <div class="heatmap" id="pressure"></div>
           </div>
         </div>
         <div class="heatmap-item">
-          <h3>Shot Location Heatmap</h3>
+          <h3>Shot Location</h3>
           <div class="heatmap-container" id="shot-container">
             <div class="heatmap" id="shot"></div>
           </div>
