@@ -33,12 +33,6 @@
 
   <section>
     <div id="visualization-container">
-      <h1>Match Details</h1>
-      <p id="match-details"></p>
-      <h1>Team Heatmaps</h1>
-      <select id="team-selector">
-        <option value="Chelsea">Chelsea</option>
-      </select>
       <div id="heatmaps-grid">
         <div class="heatmap-item">
           <h3>Dribble Location Heatmap</h3>
@@ -65,9 +59,18 @@
           </div>
         </div>
       </div>
+      <select id="team-selector">
+        <option value="Chelsea">Chelsea</option>
+      </select>
+      <p id="match-details"></p>
+      <div id="controls">
+        <div id="slider-container">
+          <input id="gameweek-slider" type="range" min="1" max="38" value="1" step="1"/>
+          <div id="slider-ticks"></div>
+        </div>
+        <button id="slider-button">Play</button>
+      </div>
     </div>
-    <input id="gameweek-slider" type="range" min="1" max="38" value="1" step="1"/>
-    <button id="slider-button">Play</button>
   </section>
 
   <footer>

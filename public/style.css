@@ -85,17 +85,18 @@ a {
 }
 
 .heatmap-item h3 {
-  font-size: 0.95rem;
-  font-weight: 500;
+  font-size: 1.15rem;
+  font-weight: 800;
   text-align: center;
   margin-bottom: 6px;
+  margin-right: 6rem;
 }
 
 .heatmap-container,
 .heatmap,
 .layer {
   width: 100%;
-  aspect-ratio: 3 / 2;
+  aspect-ratio: 5 / 3;
   background-position: center;
   background-repeat: no-repeat;
   position: relative;
@@ -103,7 +104,7 @@ a {
 }
 
 .heatmap-container {
-  border-radius: 6px;
+
   overflow: hidden;
   max-width: 480px;
 }
@@ -119,17 +120,24 @@ a {
 }
 
 /* Slider and controls styling */
+#slider-container {
+  position: relative;
+  flex: 1;
+  width: 900px;
+  padding-bottom: 20px;
+}
+
 #gameweek-slider {
   width: 100%;
-  max-width: 500px;
-  margin: 10px auto;
-  display: block;
+  margin: 0;
   -webkit-appearance: none;
   appearance: none;
   height: 6px;
   border-radius: 999px;
   background: linear-gradient(90deg, rgba(255,255,255,0.12), rgba(255,255,255,0.06));
   outline: none;
+  position: relative;
+  z-index: 2;
 }
 
 #gameweek-slider::-webkit-slider-thumb {
@@ -140,6 +148,50 @@ a {
   background: var(--fg);
   box-shadow: 0 2px 6px rgba(0,0,0,0.4);
   border: 2px solid rgba(0,0,0,0.2);
+  cursor: pointer;
+}
+
+#gameweek-slider::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--fg);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+  border: 2px solid rgba(0,0,0,0.2);
+  cursor: pointer;
+  border: none;
+}
+
+#slider-ticks {
+  position: absolute;
+  top: 10px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+}
+
+.tick {
+  width: 1px;
+  height: 8px;
+  background: rgba(255,255,255,0.3);
+  position: relative;
+}
+
+.tick.major {
+  height: 12px;
+  background: rgba(255,255,255,0.5);
+}
+
+.tick-label {
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.7rem;
+  color: var(--muted);
+  white-space: nowrap;
 }
 
 /* Controls: selector and match-details */
@@ -150,14 +202,45 @@ a {
   background: transparent;
   color: var(--fg);
   border: 1px solid rgba(255,255,255,0.12);
-  margin: 6px 0 8px;
+  margin: 6px 0 12px;
   font-size: 0.9rem;
 }
 
 #match-details {
   color: var(--muted);
-  margin-bottom: 6px;
-  font-size: 0.85rem;
+  margin-bottom: 12px;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+#controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: 1000px;
+  margin: 0 auto;
+  justify-content: center;
+}
+
+#slider-button {
+  padding: 8px 20px;
+  border-radius: 6px;
+  background: rgba(255,255,255,0.1);
+  color: var(--fg);
+  border: 1px solid rgba(255,255,255,0.2);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 80px;
+}
+
+#slider-button:hover {
+  background: rgba(255,255,255,0.15);
+  border-color: rgba(255,255,255,0.3);
+}
+
+#slider-button:active {
+  background: rgba(255,255,255,0.2);
 }
 
 /* Small responsive tweaks */

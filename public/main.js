@@ -111,7 +111,30 @@ let matches = null;
 let currentTeam = "Chelsea";
 let sliderInitialized = false;
 
+// Generate tick marks for the slider
+function generateSliderTicks() {
+  const ticksContainer = document.getElementById('slider-ticks');
+  for (let i = 1; i <= 38; i++) {
+    const tick = document.createElement('div');
+    tick.className = 'tick';
+    
+    // Make every 5th tick major and add label
+    if (i % 5 === 0 || i === 1 || i === 38) {
+      tick.classList.add('major');
+      const label = document.createElement('span');
+      label.className = 'tick-label';
+      label.textContent = i;
+      tick.appendChild(label);
+    }
+    
+    ticksContainer.appendChild(tick);
+  }
+}
+
 (async () => {
+  // Generate slider tick marks
+  generateSliderTicks();
+  
   matches = await loadJsonFile("/data/matches.json");
   if (!matches) {
     console.error("Could not load matches.json; visualization will not initialize.");
