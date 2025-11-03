@@ -13,12 +13,13 @@ async function loadJsonFile(filePath) {
   }
 }
 
-const teams = ['AFC Bournemouth', 'Arsenal', 'Newcastle United',
-       'Manchester United', 'West Bromwich Albion', 'Leicester City',
-       'Everton', 'Norwich City', 'Stoke City', 'Aston Villa',
-       'Crystal Palace', 'Swansea City', 'Liverpool', 'Tottenham Hotspur',
-       'Watford', 'Southampton', 'Manchester City', 'West Ham United',
-       'Sunderland'];
+const teams = ['AFC Bournemouth', 'Arsenal', 'Aston Villa',
+       'Crystal Palace', 'Everton', 'Leicester City',
+       'Liverpool', 'Manchester City', 'Manchester United',
+       'Newcastle United', 'Norwich City', 'Southampton',
+       'Stoke City', 'Sunderland', 'Swansea City',
+       'Tottenham Hotspur', 'Watford', 'West Bromwich Albion',
+       'West Ham United'];;
 
 // Populate the team selector dynamically
 const team_selector = document.getElementById("team-selector");
