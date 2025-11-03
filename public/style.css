@@ -33,11 +33,13 @@ header {
 header h1 {
   font-size: 1.4rem;
   margin-bottom: 8px;
+  text-align: center;
 }
 
 header p {
   font-size: 0.9rem;
   margin: 0;
+  justify-self: center;
 }
 
 .project-description {
@@ -64,6 +66,10 @@ h1 {
 a {
   text-decoration: none;
   color: var(--fg);
+}
+
+.link {
+  text-decoration: underline;
 }
 
 /* Visualization area - maintain sizes but present more cleanly */
@@ -110,7 +116,6 @@ a {
 }
 
 .heatmap-container {
-
   overflow: hidden;
   max-width: 480px;
 }
@@ -129,7 +134,7 @@ a {
 #slider-container {
   position: relative;
   flex: 1;
-  width: 900px;
+  width: 70vw;
   padding-bottom: 20px;
 }
 
@@ -255,4 +260,33 @@ a {
     grid-template-columns: 1fr;
     gap: 16px;
   }
+}
+
+.writeup-wrapper {
+  margin-top: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 11px;
+}
+
+.content {
+  display: none;
+  margin-top: 10px;
+  width: 70vw;
+}
+
+.content.show {
+  display: block;
+}
+
+.writeup-button {
+  border: none;
+  background-color: transparent;
+  color: lightgray;
+}
+
+.writeup-button:hover {
+  color: rgb(180, 180, 180)
 }

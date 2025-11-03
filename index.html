@@ -32,7 +32,10 @@
       This interactive dashboard visualizes tactical patterns for Premier League teams across the 2015-16 season. 
       Using Gaussian smoothing, we generated heatmaps showing where teams dribble, pass, apply pressure, and shoot. 
       All data is standardized so the left side of each heatmap represents the selected team's defending half, 
-      allowing for consistent comparison across teams and match situations.
+      allowing for consistent comparison across teams and match situations. In addition, the scales on the right of 
+      the graphs represent the Gaussian-smoothed intensity of events per region. Notebook to generate heatmaps
+      can be found <a href="https://colab.research.google.com/drive/1Zd-MZwQqqwvYi-qxn8wgIog9Ty6ZPQB_?usp=sharing" class="link">here</a>,
+      and techniques were adapted from <a href="https://mplsoccer.readthedocs.io/en/latest/" class="link">mplsoccer's docs</a>.
     </p>
   </header>
 
@@ -78,6 +81,60 @@
     </div>
   </section>
 
+  <section>
+    <div class="writeup-wrapper">
+      <h1>Write Up</h1>
+      <button id="expand-writeup" class="writeup-button">show writeup</button>
+      <div id="writeup-content" class="content">
+        <p>
+          The question we aimed to answer with the visualizations above was how consistent are team tactics 
+          throughout the Premier Leauge season? We chose to answer this by creating visualizations that show 
+          where four of the most important tactical events take place throughout the game. These events are 
+          applying pressure to the opponent, making passes, taking shots, and dribbling. By creating heatmaps of
+          where these events take place with the greatest frequency throughout the game, we can get a glimpse 
+          into the tactics used in the game. For example, in gameweek 2 when Chelsea lost 3-0 to Manchester City,
+          we see that Chelsea's passes and dribbles are very frequent along the left touchline. This shows that 
+          Chelsea aimed to build along the left wing with Eden Hazard throughout the game. We can also see that 
+          the pressure applied by Chelsea was mostly in their own half. Looking at Manchester City's pressure 
+          heatmap from the same game shows that they also applied most of their pressure in the same half. This 
+          likely indicates a relatively even game in terms of possession as both teams were not oftern pressing in
+          the opponents half. This is backed up by the fact that possession was 51% to Chelsea, 49% to City during
+          the game. Now, looking at Chelsea's 3-2 win over West Brom in gameweek 3, we see a different story. The passing
+          and dribbling maps are much more central, showing that Chelsea chose to build up through the center instead of
+          along the wings. We also saw much more pressure applied in the opposing teams half, indicating a strong press 
+          and likely more possession. This is backed up by Chelsea's 64% first half posession. In the second half posession 
+          dropped after a red card, but the overall posession was still 57% showing the same trend. 
+          <br><br>
+          For interaction, we chose to add two modes of doing so. The first was to select a team as this allowed for a more 
+          focused view of the data without having to sift through 20 teams' data. The second was a slider to move through match 
+          weeks. This was the most influential in answering our question as it allowed you to see trends over time. We added a 
+          play button to be able to quickly move through all of the weeks, and animations between each heatmap to better visualize 
+          and interpret how the heatmaps shift. In addition, you can chose weeks and drag the slider to get a faster/slower view. 
+          We also chose to use a color scheme that could effectively visualize heat in an intuitive way. The darker and duller colors 
+          showed dull spots while the bright intense colors showed areas of high frequency for each stat.
+          We also considered adding passing networks, which are fully connected graph between players that shows their average 
+          positions and weights edges by how many passes were made between two players. This provides a strong insight into 
+          formation and overall team shape/tactics. However, we found that implementing these and providing transitions between 
+          them would have resulting in significantly more work, and we wanted to have a proof of concept first. We plan to build 
+          and expand on this idea in the final project.
+          <br><br>
+          Development was split into 3 parts. The first was generating the heatmaps. We used data from mplsoccer's sbopen api, 
+          and followed examples from <a href="https://mplsoccer.readthedocs.io/en/latest/gallery/pitch_plots/plot_heatmap.html">
+          mplsoccer's docs<a>. Links to these can be found in the site header, along with the notebook 
+          used to generate the heatmaps. We gathered match data from the 2015/16 Premier League season, and wrote a function to 
+          create files of the form ./A3Data/[team]/[stat]/[gameweek] and write them to Google Drive. These were then downloaded 
+          and added to the site. The next part was implementing crossfading animations using D3 to fade between images, and adding 
+          this to the site. To develop more efficiently, we created a locally hosted Vite project and copied the code over so 
+          we could see changes without waiting for the CI/CD pipeline to run every time. Finally, the last step was designing 
+          the site layout. The division of work and time was as follows: Solden created the generation notebook which took about 
+          2 hours total. Both of us worked on the animation and slider/dropdown tools which we implemented in a 3 hour session. 
+          Finally, Liam did the design and layout which took roughty 2 hours as well. We also both worked on the writeup with 
+          about 30 minutes each put into it.
+        </p>
+      </div>
+    </div>
+  </section>
+
   <footer>
     <p>
       <a href="https://gitlab.cs.washington.edu/cse442/25au/a3/champions-league">Repository</a>
@@ -90,6 +147,20 @@
 
   <script src="main.js"></script>
   <script src="slider.js"></script>
+  <script>
+    const btn = document.getElementById('expand-writeup');
+    const content = document.getElementById('writeup-content');
+
+    btn.addEventListener('click', () => {
+      content.classList.toggle('show');
+
+      if (content.classList.contains('show')) {
+        btn.textContent = 'hide writeup';
+      } else {
+        btn.textContent = 'show writeup';
+      }
+    });
+  </script>
 </body>
 
 </html>
