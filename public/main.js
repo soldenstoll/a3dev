@@ -79,24 +79,31 @@ function updateAllHeatmaps(team, gameweek = 1) {
     } else {
       // Create overlay layer for next image
       const overlay = d3.select(container).append('div')
-        .attr('class', 'layer')
+        .attr('class', `layer ${stat}`)
         .style('background-image', `url(data/${team_name}/${stat_name}/${gameweek}.png)`)
         .style('opacity', 0);
 
       // Set crossfade duration
       const duration = 600;
 
-      overlay.transition()
+      overlay.interrupt('fade');
+
+      overlay.transition('fade')
         .duration(duration)
         .style('opacity', 1);
 
+      d3.select(heatmap).interrupt('exit')
+
       // Add fading transition
       d3.select(heatmap)
-        .transition().duration(duration)
+        .transition('exit').duration(duration)
         .style("opacity", 0)
         .on("end", () => {
           heatmap.style.backgroundImage = `url(data/${team_name}/${stat_name}/${gameweek}.png)`;
           heatmap.style.opacity = 1;
+
+          // Remove all layers
+          d3.selectAll(`.layer.${stat}`).remove()
 
           // Remove overlay
           overlay.remove();
